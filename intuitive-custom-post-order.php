@@ -50,8 +50,6 @@ class Hicpo
 	{
 
 		add_action( 'admin_menu', array( &$this, 'admin_menu') );
-
-		add_action( 'admin_init', array( &$this, 'refresh' ) );
 		add_action( 'admin_init', array( &$this, 'update_options') );
 		add_action( 'init', array( &$this, 'enable_objects' ) );
 
@@ -81,7 +79,7 @@ class Hicpo
 	function enable_objects()
 	{
 		$hicpo_options = get_option( 'hicpo_options' );
-		$objects = $hicpo_options['objects'];
+		$objects       = $hicpo_options['objects'];
 
 		if ( is_array( $objects ) ) {
 			$active = false;
@@ -195,6 +193,7 @@ class Hicpo
 			update_option( 'hicpo_options', $input_options );
 			wp_redirect( 'admin.php?page=hicpo-settings&msg=update' );
 		}
+		$this->refresh();
 	}
 
 	function hicpo_previous_post_where( $where )
