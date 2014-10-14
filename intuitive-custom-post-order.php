@@ -205,7 +205,12 @@ class Hicpo
 
 		if ( in_array( $post->post_type, $objects ) ) {
 			$current_menu_order = $post->menu_order;
-			$where = "WHERE p.menu_order > '".$current_menu_order."' AND p.post_type = '". $post->post_type ."' AND p.post_status = 'publish'";
+			if ($where) {
+				$where .= 'AND';
+			} else {
+				$where .= 'WHERE';
+			}
+			$where .= " p.menu_order > '" . $current_menu_order . "' AND p.post_type = '" . $post->post_type . "' AND p.post_status = 'publish'";
 		}
 		return $where;
 	}
@@ -232,7 +237,12 @@ class Hicpo
 
 		if ( in_array( $post->post_type, $objects ) ) {
 			$current_menu_order = $post->menu_order;
-			$where = "WHERE p.menu_order < '".$current_menu_order."' AND p.post_type = '". $post->post_type ."' AND p.post_status = 'publish'";
+			if ($where) {
+				$where .= 'AND';
+			} else {
+				$where .= 'WHERE';
+			}
+			$where .= " p.menu_order < '" . $current_menu_order . "' AND p.post_type = '" . $post->post_type . "' AND p.post_status = 'publish'";
 		}
 		return $where;
 	}
